@@ -45,6 +45,7 @@ RUN apk --update add php-apache2 curl \
     sed -i 's#AllowOverride none#AllowOverride All#' /etc/apache2/httpd.conf && \
 	sed -i 's#AllowOverride None#AllowOverride All#' /etc/apache2/httpd.conf && \
 	sed -i 's#Require all denied#Require all granted#' /etc/apache2/httpd.conf && \
+	sed -i 's#\#LoadModule rewrite_module modules/mod_rewrite.so#LoadModule rewrite_module modules/mod_rewrite.so#' /etc/apache2/httpd.conf && \
 	sed -i 's#short_open_tag = Off#short_open_tag = On#' /etc/php/php.ini && \
 	sed -i 's#error_reporting = .*$#error_reporting = E_ERROR | E_WARNING | E_PARSE#' /etc/php/php.ini && \
 	sed -i 's#display_errors = Off#display_errors = On#' /etc/php/php.ini && \
@@ -62,22 +63,22 @@ RUN mkdir /scripts/pre-exec.d && \
 
 # install MySql based on:: https://github.com/timhaak/docker-mariadb-alpine
 
-ENV LANG="en_US.UTF-8" \
-    LC_ALL="en_US.UTF-8" \
-	LANGUAGE="en_US.UTF-8" \
-	DB_USER="mysql" \
-	DB_PASS="" \
-	TERM="xterm"
+# ENV LANG="en_US.UTF-8" \
+#    LC_ALL="en_US.UTF-8" \
+#	LANGUAGE="en_US.UTF-8" \
+#	DB_USER="mysql" \
+#	DB_PASS="" \
+#	TERM="xterm"
 
-RUN apk --update add mariadb mariadb-client php-pdo_mysql php-mysql php-mysqli #&& \
-	rm -rf /tmp/src && \
-    rm -rf /var/cache/apk/* \
+# RUN apk --update add mariadb mariadb-client php-pdo_mysql php-mysql php-mysqli #&& \
+#	rm -rf /tmp/src && \
+#    rm -rf /var/cache/apk/* \
 
-ADD ./scripts/my.cnf /etc/mysql/my.cnf
-ADD ./scripts/mysql.sh /scripts/pre-init.d/.
+# ADD ./scripts/my.cnf /etc/mysql/my.cnf
+# ADD ./scripts/mysql.sh /scripts/pre-init.d/.
 
 EXPOSE 80
-EXPOSE 3306
+# EXPOSE 3306
 
 # VOLUME /app
 WORKDIR /app
