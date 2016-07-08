@@ -83,5 +83,5 @@ EXPOSE 80
 WORKDIR /app
 VOLUME /data
 
- ENTRYPOINT ["/scripts/run.sh"]
+# ENTRYPOINT ["/scripts/run.sh"]
 
