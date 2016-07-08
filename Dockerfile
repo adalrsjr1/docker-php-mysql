@@ -5,41 +5,41 @@ MAINTAINER adalrsjr1 - https://github.com/adalrsjr1
 #                                 https://github.com/kost/docker-alpine/blob/master/alpine-apache-php/Dockerfile
 #                                 https://hub.docker.com/r/mlabbe/speedtest-mini/~/dockerfile/
 
-RUN apk --update add php-apache2 curl \
-    php-mcrypt \ 
-	php-soap \ 
-	php-openssl \ 
-	php-gmp \ 
-	php-pdo_odbc \ 
-	php-json \ 
-	php-dom \ 
-	php-pdo \ 
-	php-zip \ 
-	php-mysql \ 
-	php-sqlite3 \ 
-	php-apcu \ 
-	php-pdo_pgsql \ 
-	php-bcmath \ 
-	php-gd \ 
-	php-xcache \ 
-	php-odbc \ 
-	php-pdo_mysql \ 
-	php-pdo_sqlite \ 
-	php-gettext \ 
-	php-xmlreader \ 
-	php-xmlrpc \ 
-	php-bz2 \ 
-	php-memcache \ 
-	php-mssql \ 
-	php-iconv \ 
-	php-pdo_dblib \
-	php-curl \ 
-	php-ctype \ 
-	php-phar \ 
-	php-cli \
-	php-phar && \
-    rm -f /var/cache/apk/* && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+RUN apk --update add php5-apache2 curl \
+    php5-mcrypt \ 
+	php5-soap \ 
+	php5-openssl \ 
+	php5-gmp \ 
+	php5-pdo_odbc \ 
+	php5-json \ 
+	php5-dom \ 
+	php5-pdo \ 
+	php5-zip \ 
+	php5-mysql \ 
+	php5-sqlite3 \ 
+	php5-apcu \ 
+	php5-pdo_pgsql \ 
+	php5-bcmath \ 
+	php5-gd \ 
+	php5-xcache \ 
+	php5-odbc \ 
+	php5-pdo_mysql \ 
+	php5-pdo_sqlite \ 
+	php5-gettext \ 
+	php5-xmlreader \ 
+	php5-xmlrpc \ 
+	php5-bz2 \ 
+	php5-memcache \ 
+	php5-mssql \ 
+	php5-iconv \ 
+	php5-pdo_dblib \
+	php5-curl \ 
+	php5-ctype \ 
+	php5-phar \ 
+	php5-cli \
+	php5-phar && \
+    rm -f /var/cache/apk/* 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     mkdir /app && chown -R apache:apache /app && \
     sed -i 's#^DocumentRoot ".*#DocumentRoot "/app"#g' /etc/apache2/httpd.conf && \
     sed -i 's#AllowOverride none#AllowOverride All#' /etc/apache2/httpd.conf && \
@@ -51,7 +51,6 @@ RUN apk --update add php-apache2 curl \
 	sed -i 's#display_errors = Off#display_errors = On#' /etc/php/php.ini && \
 	sed -i 's#display_startup_errors = Off#display_startup_errors = On#' /etc/php/php.ini && \
 	echo "Apache successfully installed"
-
 ADD app/* /app/.
 
 ADD scripts/run.sh /scripts/run.sh
