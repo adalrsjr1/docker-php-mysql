@@ -46,10 +46,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 	sed -i 's#AllowOverride None#AllowOverride All#' /etc/apache2/httpd.conf && \
 	sed -i 's#Require all denied#Require all granted#' /etc/apache2/httpd.conf && \
 	sed -i 's#\#LoadModule rewrite_module modules/mod_rewrite.so#LoadModule rewrite_module modules/mod_rewrite.so#' /etc/apache2/httpd.conf && \
-	sed -i 's#short_open_tag = Off#short_open_tag = On#' /etc/php/php.ini && \
-	sed -i 's#error_reporting = .*$#error_reporting = E_ERROR | E_WARNING | E_PARSE#' /etc/php/php.ini && \
-	sed -i 's#display_errors = Off#display_errors = On#' /etc/php/php.ini && \
-	sed -i 's#display_startup_errors = Off#display_startup_errors = On#' /etc/php/php.ini && \
+	sed -i 's#short_open_tag = Off#short_open_tag = On#' /etc/php5/php.ini && \
+	sed -i 's#error_reporting = .*$#error_reporting = E_ERROR | E_WARNING | E_PARSE#' /etc/php5/php.ini && \
+	sed -i 's#display_errors = Off#display_errors = On#' /etc/php5/php.ini && \
+	sed -i 's#display_startup_errors = Off#display_startup_errors = On#' /etc/php5/php.ini && \
 	echo "Apache successfully installed"
 ADD app/* /app/.
 
@@ -83,5 +83,5 @@ EXPOSE 80
 WORKDIR /app
 VOLUME /data
 
-ENTRYPOINT ["/scripts/run.sh"]
+ ENTRYPOINT ["/scripts/run.sh"]
 
